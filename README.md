@@ -84,7 +84,7 @@ public interface AuthenticationManager {
 
 AuthenticationManager 主要实现类为 ProviderManager，在 ProviderManager 中管理了众多 AuthenticationProvider 实例。在一次完整的认证流程中，Spring Security 允许存在多个 AuthenticationProvider ，用来实现多种认证方式，这些 AuthenticationProvider 都是由 ProviderManager 进行统一管理的。
 
-![image-20220110103518334](SpringSecurity.assets/image-20220110103518334.png)
+![image-20220110103518334](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110103518334.png)
 
 #### Authentication
 
@@ -127,7 +127,7 @@ SecurityContextHolder 用来获取登录之后用户信息。Spring Security 会
 
 > AccessDecisionVoter (访问决定投票器)，投票器会检查用户是否具备应有的角色，进而投出赞成、反对或者弃权票。
 
-![image-20220110111011018](SpringSecurity.assets/image-20220110111011018.png)
+![image-20220110111011018](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110111011018.png)
 
 AccesDecisionVoter 和 AccessDecisionManager 都有众多的实现类，在 AccessDecisionManager 中会挨个遍历 AccessDecisionVoter，进而决定是否允许用户访问，因而 AaccesDecisionVoter 和 AccessDecisionManager 两者的关系类似于 AuthenticationProvider 和 ProviderManager 的关系。
 
@@ -135,7 +135,7 @@ AccesDecisionVoter 和 AccessDecisionManager 都有众多的实现类，在 Acce
 
 > ConfigAttribute，用来保存授权时的角色信息
 
-![image-20220110111037603](SpringSecurity.assets/image-20220110111037603.png)
+![image-20220110111037603](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110111037603.png)
 
 在 Spring Security 中，用户请求一个资源(通常是一个接口或者一个 Java 方法)需要的角色会被封装成一个 ConfigAttribute 对象，在 ConfigAttribute 中只有一个 getAttribute方法，该方法返回一个 String 字符串，就是角色的名称。一般来说，角色名称都带有一个 `ROLE_` 前缀，投票器 AccessDecisionVoter 所做的事情，其实就是比较用户所具各的角色和请求某个
 资源所需的 ConfigAtuibute 之间的关系。
@@ -158,7 +158,7 @@ AccesDecisionVoter 和 AccessDecisionManager 都有众多的实现类，在 Acce
 # 1.创建 springboot 应用
 ```
 
-![image-20220110113408799](SpringSecurity.assets/image-20220110113408799.png)
+![image-20220110113408799](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110113408799.png)
 
 ```markdown
 # 2.创建 controller
@@ -204,9 +204,9 @@ public class HelloController {
 - 2.访问 hello 发现直接跳转到登录页面
 ```
 
-![image-20220110114044889](SpringSecurity.assets/image-20220110114044889.png)
+![image-20220110114044889](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110114044889.png)
 
-![image-20220110114109713](SpringSecurity.assets/image-20220110114109713.png)
+![image-20220110114109713](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110114109713.png)
 
 ```markdown
 # 3.登录系统
@@ -214,7 +214,7 @@ public class HelloController {
 - 默认密码为:  控制台打印的 uuid
 ```
 
-![image-20220110114258671](SpringSecurity.assets/image-20220110114258671.png)
+![image-20220110114258671](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110114258671.png)
 
 ![image-20220110114227714](SpringSecurity.assets/image-20220110114227714.png)
 
@@ -235,7 +235,7 @@ https://docs.spring.io/spring-security/site/docs/5.5.4/reference/html5/#servlet-
 
 在 Spring Security 中 `认证、授权` 等功能都是基于[过滤器](https://docs.spring.io/spring-security/site/docs/5.5.4/reference/html5/#servlet-architecture)完成的。
 
-![image-20220110120349053](SpringSecurity.assets/image-20220110120349053.png)
+![image-20220110120349053](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220110120349053.png)
 
 ![image-20220110115946010](SpringSecurity.assets/image-20220110115946010.png)
 
@@ -283,13 +283,13 @@ FlterChainProxy 来统一管理。Spring Security 中的过滤器链通过 Filte
 
 可以看出，Spring Security 提供了 30 多个过滤器。默认情况下Spring Boot 在对 Spring Security 进入自动化配置时，会创建一个名为 SpringSecurityFilerChain 的过滤器，并注入到 Spring 容器中，这个过滤器将负责所有的安全管理，包括用户认证、授权、重定向到登录页面等。具体可以参考WebSecurityConfiguration的源码:
 
-![image-20220111211538604](SpringSecurity.assets/image-20220111211538604.png)
+![image-20220111211538604](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220111211538604.png)
 
-![image-20220111211436764](SpringSecurity.assets/image-20220111211436764.png)
+![image-20220111211436764](https://cdn.jsdelivr.net/gh/1040580896/images@master/img/image-20220111211436764.png)
 
 ### SpringBootWebSecurityConfiguration
 
-这个类是 spring boot 自动配置类，通过这个源码得知，默认情况下对所有请求进行权限控制:
+这个类是 spring boot  Security自动配置类，通过这个源码得知，默认情况下对所有请求进行权限控制:
 
 ```java
 @Configuration(proxyBeanMethods = false)
@@ -4323,8 +4323,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 ## OAuth2 简介
 
-OAuth 是一个开放标准，该标准允许用户让第三方应用访问该用户在某一网站上存储的私
-密资源（如头像、照片、视频等），并且在这个过程中无须将用户名和密码提供给第三方应用。通过令牌 （token）可以实现这一功能，每一个令牌授权一个特定的网站在特定的时段内允许可特定的资源。
+**OAuth 是一个开放标准，该标准允许用户让第三方应用访问该用户在某一网站上存储的私**
+**密资源（如头像、照片、视频等），并且在这个过程中无须将用户名和密码提供给第三方应用**。通过令牌 （token）可以实现这一功能，每一个令牌授权一个特定的网站在特定的时段内允许可特定的资源。
 OAuth 让用户可以授权第三方网站灵活访问它们存储在另外一些资源服务器上的特定信息，
 而非所有内容。对于用户而言，我们在互联网应用中最常见的 OAuth 应用就是各种第三
 方登录，例如QQ授权登录、微信授权登录、微博授权登录、GitHub 授权登录等。
@@ -4352,12 +4352,16 @@ OAuth2 协议一共支持**四种不同的授权模式**：
 
 无论哪种授权模式，其授权流程都是相似的，只不过在个别步骤上有万差异而已。整体流程如下:
 
+```
+4个角色，每个角色有着不同的功能，第一个是判断是否是合法的第三方用户，双方是否达成协议
+```
+
 ![image-20220527114815048](SpringSecurity.assets/image-20220527114815048.png)
 
 从上图中我们可以看出 OAuth2 中包含四种不同的角色：
 
 - **Client：**第三方应用。
-- **Resource Owner**：资源所有者。
+- **Resource Owner**：资源所有者，受信任的网站
 - **Authorization Server** ：授权服务器。
 - **Resource Server**： 资源服务器。
 
